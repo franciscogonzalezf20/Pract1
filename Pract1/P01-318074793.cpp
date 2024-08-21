@@ -148,16 +148,16 @@ void CrearTriangulo()
 
     glGenBuffers(1, &VBO);
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW); //pasarle los datos al VBO asignando tamano, los datos y en este caso es est·tico pues no se modificar·n los valores
+    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW); //pasarle los datos al VBO asignando tamano, los datos y en este caso es est√°tico pues no se modificar√°n los valores
 
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GL_FLOAT), (GLvoid*)0);//Stride en caso de haber datos de color por ejemplo, es saltar cierta cantidad de datos
     glEnableVertexAttribArray(0);
-    //agregar valores a vËrtices y luego declarar un nuevo vertexAttribPointer
+    //agregar valores a v√®rtices y luego declarar un nuevo vertexAttribPointer
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindVertexArray(0);
 
 }
-void AddShader(GLuint theProgram, const char* shaderCode, GLenum shaderType) //FunciÛn para agregar los shaders a la tarjeta gr·fica
+void AddShader(GLuint theProgram, const char* shaderCode, GLenum shaderType) //Funci√≥n para agregar los shaders a la tarjeta gr√°fica
 //the Program recibe los datos de theShader
 
 
@@ -167,11 +167,11 @@ void AddShader(GLuint theProgram, const char* shaderCode, GLenum shaderType) //F
     theCode[0] = shaderCode;//shaderCode es el texto que se le pasa a theCode
     GLint codeLength[1];
     codeLength[0] = strlen(shaderCode);//longitud del texto
-    glShaderSource(theShader, 1, theCode, codeLength);//Se le asigna al shader el cÛdigo
+    glShaderSource(theShader, 1, theCode, codeLength);//Se le asigna al shader el c√≥digo
     glCompileShader(theShader);//Se comila el shader
     GLint result = 0;
     GLchar eLog[1024] = { 0 };
-    //verificaciones y prevenciÛn de errores
+    //verificaciones y prevenci√≥n de errores
     glGetShaderiv(theShader, GL_COMPILE_STATUS, &result);
     if (!result)
     {
@@ -179,7 +179,7 @@ void AddShader(GLuint theProgram, const char* shaderCode, GLenum shaderType) //F
         printf("EL error al compilar el shader %d es: %s \n", shaderType, eLog);
         return;
     }
-    glAttachShader(theProgram, theShader);//Si no hubo problemas se asigna el shader a theProgram el cual asigna el cÛdigo a la tarjeta gr·fica
+    glAttachShader(theProgram, theShader);//Si no hubo problemas se asigna el shader a theProgram el cual asigna el c√≥digo a la tarjeta gr√°fica
 }
 
 void CompileShaders() {
@@ -194,8 +194,8 @@ void CompileShaders() {
     //Para terminar de linkear el programa y ver que no tengamos errores
     GLint result = 0;
     GLchar eLog[1024] = { 0 };
-    glLinkProgram(shader);//se linkean los shaders a la tarjeta gr·fica
-    //verificaciones y prevenciÛn de errores
+    glLinkProgram(shader);//se linkean los shaders a la tarjeta gr√°fica
+    //verificaciones y prevenci√≥n de errores
     glGetProgramiv(shader, GL_LINK_STATUS, &result);
     if (!result)
     {
@@ -217,14 +217,14 @@ void CompileShaders() {
 }
 int main()
 {
-    // InicializaciÛn de GLFW
+    // Inicializaci√≥n de GLFW
     if (!glfwInit())
     {
-        fprintf(stderr, "FallÛ inicializar GLFW\n");
+        fprintf(stderr, "Fall√≥ inicializar GLFW\n");
         return 1;
     }
 
-    // ConfiguraciÛn de GLFW
+    // Configuraci√≥n de GLFW
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
@@ -234,33 +234,33 @@ int main()
     GLFWwindow* mainWindow = glfwCreateWindow(WIDTH, HEIGHT, "Clase 1", NULL, NULL);
     if (!mainWindow)
     {
-        fprintf(stderr, "FallÛ en crearse la ventana con GLFW\n");
+        fprintf(stderr, "Fall√≥ en crearse la ventana con GLFW\n");
         glfwTerminate();
         return 1;
     }
 
-    // Obtener tamaÒo de buffer
+    // Obtener tama√±o de buffer
     int BufferWidth, BufferHeight;
     glfwGetFramebufferSize(mainWindow, &BufferWidth, &BufferHeight);
 
     // Establecer contexto de OpenGL
     glfwMakeContextCurrent(mainWindow);
-    glfwSwapInterval(1); // SincronizaciÛn vertical
+    glfwSwapInterval(1); // Sincronizaci√≥n vertical
 
-    // InicializaciÛn de GLEW
+    // Inicializaci√≥n de GLEW
     glewExperimental = GL_TRUE;
     if (glewInit() != GLEW_OK)
     {
-        fprintf(stderr, "FallÛ inicializaciÛn de GLEW\n");
+        fprintf(stderr, "Fall√≥ inicializaci√≥n de GLEW\n");
         glfwDestroyWindow(mainWindow);
         glfwTerminate();
         return 1;
     }
 
-    // ConfiguraciÛn de viewport
+    // Configuraci√≥n de viewport
     glViewport(0, 0, BufferWidth, BufferHeight);
 
-    // Crear tri·ngulo y compilar shaders
+    // Crear tri√°ngulo y compilar shaders
     CrearTriangulo();
     CompileShaders();
 
@@ -287,7 +287,7 @@ int main()
         glClearColor(red, green, blue, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
-        // Dibujar tri·ngulo
+        // Dibujar tri√°ngulo
         glUseProgram(shader);
         glBindVertexArray(VAO);
         glDrawArrays(GL_TRIANGLES, 0, 800);
